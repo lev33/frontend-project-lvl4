@@ -2,6 +2,6 @@
 
 import React from 'react';
 
-import App from './App.jsx';
+import App from './components/App.jsx';
 
 export default () => <App />;
