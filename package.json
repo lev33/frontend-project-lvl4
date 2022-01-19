@@ -1,5 +1,5 @@
 {
-  "name": "frontend_l4_chat_project",
+  "name": "@hexlet/code",
   "version": "0.0.1",
   "description": "",
   "main": "server/index.js",
@@ -15,9 +15,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:hexlet-components/projects-frontend-l4-server.git"
+    "url": "git@github.com/lev33/frontend-project-lvl4"
   },
-  "author": "Kirill Mokevnin",
+  "author": "",
   "license": "ISC",
   "homepage": "",
   "dependencies": {
@@ -31,6 +31,7 @@
     "fastify-sensible": "^3.1.1",
     "fastify-socket.io": "^2.0.0",
     "fastify-static": "^4.0.1",
+    "formik": "^2.2.9",
     "http-errors": "^1.8.0",
     "jquery": "^3.6.0",
     "lodash": "^4.17.21",
@@ -38,6 +39,10 @@
     "point-of-view": "^4.14.0",
     "popper.js": "^1.16.1",
     "pug": "^3.0.2",
+    "react": "^17.0.2",
+    "react-bootstrap": "^2.1.1",
+    "react-dom": "^17.0.2",
+    "react-router-dom": "^6.2.1",
     "regenerator-runtime": "^0.13.7"
   },
   "devDependencies": {
