@@ -4,6 +4,7 @@ import {
 } from 'react-router-dom';
 
 import LoginPage from './LoginPage.jsx';
+import ChatPage from './ChatPage.jsx';
 import AuthorizationContext from '../context/AuthorizationContext.jsx';
 
 export default function App() {
@@ -20,38 +21,30 @@ export default function App() {
     setUser(null);
   };
 
+  const getAuthorizationHeader = () => {
+    const loggedUser = JSON.parse(localStorage.getItem('loggedUser'));
+    return loggedUser?.token
+      ? { Authorization: `Bearer ${loggedUser.token}` } : {};
+  };
+
   // logOut();
 
   return (
     <AuthorizationContext.Provider value={{
-      user, logIn, logOut,
+      user, logIn, logOut, getAuthorizationHeader,
     }}
     >
       <BrowserRouter>
         <div>
           <h1>Welcome to React Router!</h1>
           <Routes>
-            <Route path="/" element={user ? <Home /> : <LoginPage />} />
+            <Route path="/" element={user ? <ChatPage /> : <LoginPage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="*" element={<NoMatch />} />
           </Routes>
         </div>
       </BrowserRouter>
     </AuthorizationContext.Provider>
-  );
-}
-
-function Home() {
-  return (
-    <>
-      <main>
-        <h2>Home page</h2>
-        <p>Home page text.</p>
-      </main>
-      <nav>
-        <Link to="/login">Login</Link>
-      </nav>
-    </>
   );
 }
 
