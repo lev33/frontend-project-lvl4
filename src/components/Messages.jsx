@@ -1,9 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { observer } from 'mobx-react-lite';
 
-const Messages = () => (
-  <div>
-    CHANNEL MESSAGES
-  </div>
-);
+import StoreContext from '../context/StoreContext.jsx';
+
+const Messages = observer(() => {
+  const { chat } = useContext(StoreContext);
+
+  return (
+    <div>{chat.currentChannelId}</div>
+  );
+});
 
 export default Messages;
