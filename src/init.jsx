@@ -16,7 +16,7 @@ export default (socket) => {
   });
 
   const sendMessage = (data) => new Promise((response, reject) => {
-    const timer = setTimeout(() => reject(Error('netError')), 0);
+    const timer = setTimeout(() => reject(Error('netError')), 5000);
     socket.volatile.emit('newMessage', data, (res) => {
       if (res.status === 'ok') {
         clearTimeout(timer);
