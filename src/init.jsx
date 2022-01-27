@@ -11,8 +11,11 @@ export default (socket) => {
   const chat = new ChatStore();
 
   socket.on('newMessage', (data) => {
-    console.log('MESSAGE DATA ', data);
     chat.addMessage(data);
+  });
+
+  socket.on('newChannel', (data) => {
+    chat.addChannel(data);
   });
 
   const sendMessage = (data) => new Promise((response, reject) => {
@@ -25,12 +28,24 @@ export default (socket) => {
     });
   });
 
+  const newChannel = (data) => new Promise((response, reject) => {
+    const timer = setTimeout(() => reject(Error('netError')), 5000);
+    socket.volatile.emit('newChannel', data, (res) => {
+      if (res.status === 'ok') {
+        clearTimeout(timer);
+        const { id } = res.data;
+        chat.setCurrentChannelId(id);
+        response(res);
+      }
+    });
+  });
+
   return (
     <StoreContext.Provider value={{
       chat,
     }}
     >
-      <SocketContext.Provider value={{ sendMessage }}>
+      <SocketContext.Provider value={{ sendMessage, newChannel }}>
         <App />
       </SocketContext.Provider>
     </StoreContext.Provider>

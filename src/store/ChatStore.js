@@ -20,6 +20,10 @@ export default class ChatStore {
     this._currentChannelId = currentChannelId;
   }
 
+  addChannel(channel) {
+    this._channels.push(channel);
+  }
+
   addMessage(message) {
     this._messages.push(message);
   }

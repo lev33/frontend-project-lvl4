@@ -9,9 +9,12 @@ const Messages = observer(() => {
   const { chat } = useContext(StoreContext);
 
   const { channels, messages, currentChannelId } = chat;
-  const numberOfMessages = messages.length;
 
-  const name = currentChannelId ? channels.find((el) => el.id === currentChannelId).name : '';
+  const currentChannel = channels.find((el) => el.id === currentChannelId);
+  const currentMessages = messages.filter((el) => el.channelId === currentChannelId);
+  const numberOfMessages = currentMessages.length;
+
+  const name = currentChannel && currentChannel.name;
 
   return (
     <Col className="p-0 h-100">
@@ -24,7 +27,7 @@ const Messages = observer(() => {
           <span className="text-muted">{`${numberOfMessages} posts`}</span>
         </div>
         <FormGroup id="message-box" className="chat-messages overflow-auto px-5">
-          {messages.map(({ user, text, id }) => (
+          {currentMessages.map(({ user, text, id }) => (
             <div key={id} className="text-break mb-2">
               <b>{user}</b>
               {': '}

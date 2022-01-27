@@ -1,21 +1,74 @@
-import React, { useContext } from 'react';
+import React, {
+  useContext, useState, useRef, useEffect,
+} from 'react';
 import { observer } from 'mobx-react-lite';
 import {
-  Button, ButtonGroup, FormGroup, ListGroup, Dropdown,
+  Button, ButtonGroup, FormGroup, ListGroup, Dropdown, Modal, Form, InputGroup, FormControl,
 } from 'react-bootstrap';
+import * as Yup from 'yup';
+import { useFormik } from 'formik';
 
 import StoreContext from '../context/StoreContext.jsx';
-
-const handleAddChannel = () => {};
-const handleRemoveChannel = () => {};
-const handleRenameChannel = () => {};
-
+import SocketContext from '../context/SocketContext.jsx';
 
 const Channels = observer(() => {
   const { chat } = useContext(StoreContext);
+  const { newChannel } = useContext(SocketContext);
   const { channels, currentChannelId } = chat;
+  const channelsNames = channels.map((el) => el.name);
+
+  const [show, setShow] = useState(false);
+  const [action, setAction] = useState('');
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+  const textInput = useRef(null);
 
   const handleChangeChannel = (id) => () => chat.setCurrentChannelId(id);
+  const handleAddChannel = () => {
+    setAction('add');
+    handleShow();
+  };
+  const handleRemoveChannel = (id) => () => {
+    chat.setCurrentChannelId(id);
+    setAction('remove');
+    handleShow();
+  };
+  const handleRenameChannel = (id) => () => {
+    chat.setCurrentChannelId(id);
+    setAction('rename');
+    handleShow();
+  };
+
+  const formik = useFormik({
+    initialValues: { channelName: '' },
+    validateOnChange: false,
+    validationSchema: Yup.object({
+      channelName: Yup.string().trim()
+        .min(2, 'error')
+        .max(20, 'error')
+        .notOneOf(channelsNames, 'error')
+        .required('required'),
+    }),
+    onSubmit: async (initialValues) => {
+      const name = initialValues.channelName.trim();
+      try {
+        if (action === 'add') {
+          await newChannel({ name });
+        }
+        if (action === 'remove') {
+          // await newChannel({ name });
+        }
+        if (action === 'rename') {
+          // await newChannel({ name });
+        }
+        handleClose();
+      } catch (err) {
+        console.log(err);
+      }
+    },
+  });
 
   return (
     <div className="col-4 col-md-2 border-end pt-5 px-0 bg-ligth">
@@ -43,7 +96,7 @@ const Channels = observer(() => {
                     variant={variant}
                     onClick={handleChangeChannel(id)}
                   >
-                    <span>#</span>
+                    <span># </span>
                     {name}
                   </Button>
                 )
@@ -51,15 +104,15 @@ const Channels = observer(() => {
                   <Dropdown as={ButtonGroup}>
                     <Button
                       variant={variant}
-                      onClick={handleChangeChannel}
+                      onClick={handleChangeChannel(id)}
                     >
-                      <span>#</span>
+                      <span># </span>
                       {name}
                     </Button>
                     <Dropdown.Toggle split variant={variant} />
                     <Dropdown.Menu variant={variant}>
-                      <Dropdown.Item onClick={handleRemoveChannel}>remove</Dropdown.Item>
-                      <Dropdown.Item onClick={handleRenameChannel}>rename</Dropdown.Item>
+                      <Dropdown.Item onClick={handleRemoveChannel(id)}>remove</Dropdown.Item>
+                      <Dropdown.Item onClick={handleRenameChannel(id)}>rename</Dropdown.Item>
                     </Dropdown.Menu>
                   </Dropdown>
                 )
@@ -69,6 +122,43 @@ const Channels = observer(() => {
           })}
         </ListGroup>
       </FormGroup>
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>
+            {
+              action === 'add' ? 'add' : (action === 'remove' ? 'remove' : 'rename')
+            }
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          {action === 'remove' ? (
+            'Confirm?'
+          ) : (
+            <Form onSubmit={formik.handleSubmit}>
+              <InputGroup noValidate className="mt-auto">
+                <FormControl
+                  ref={textInput}
+                  name="channelName"
+                  required
+                  placeholder={action === 'rename' ? 'enter new name' : 'addChannel'}
+                  maxLength={20}
+                  value={formik.values.channelName}
+                  onChange={formik.handleChange}
+                  disabled={formik.isSubmitting}
+                />
+              </InputGroup>
+            </Form>
+          )}
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+          <Button variant="primary" onClick={formik.handleSubmit}>
+            Save Changes
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 });
