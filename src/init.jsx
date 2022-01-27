@@ -1,14 +1,25 @@
 // @ts-check
 
 import React from 'react';
+import i18next from 'i18next';
+import { I18nextProvider, initReactI18next } from 'react-i18next';
 
 import App from './components/App.jsx';
 import ChatStore from './store/ChatStore.js';
 import StoreContext from './context/StoreContext.jsx';
 import SocketContext from './context/SocketContext.jsx';
+import resources from './resources/index.js';
 
-export default (socket) => {
+export default async (socket) => {
   const chat = new ChatStore();
+
+  const i18n = i18next.createInstance();
+  await i18n
+    .use(initReactI18next)
+    .init({
+      resources,
+      fallbackLng: 'ru',
+    });
 
   socket.on('newMessage', (data) => {
     chat.addMessage(data);
@@ -79,7 +90,9 @@ export default (socket) => {
         sendMessage, newChannel, renameChannel, removeChannel,
       }}
       >
-        <App />
+        <I18nextProvider i18n={i18n}>
+          <App />
+        </I18nextProvider>
       </SocketContext.Provider>
     </StoreContext.Provider>
   );

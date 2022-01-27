@@ -6,12 +6,14 @@ import { useNavigate } from 'react-router-dom';
 import {
   Button, Card, Form, FormControl, FormGroup, FormLabel,
 } from 'react-bootstrap';
+import { useTranslation } from 'react-i18next';
 
 import AuthorizationContext from '../context/AuthorizationContext.jsx';
 
 const SignupPage = () => {
   const { logIn } = useContext(AuthorizationContext);
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const nameInput = useRef();
   useEffect(() => {
@@ -64,7 +66,7 @@ const SignupPage = () => {
                 Picture
               </div>
               <Form className="w-50" onSubmit={formik.handleSubmit}>
-                <h1 className="text-center mb-4">Reg</h1>
+                <h1 className="text-center mb-4">{t('signup.registration')}</h1>
                 <FormGroup className="form-floating mb-3">
                   <FormControl
                     ref={nameInput}
@@ -73,13 +75,13 @@ const SignupPage = () => {
                     name="username"
                     className=""
                     autoComplete="username"
-                    placeholder={3 - 20}
+                    placeholder={t('signup.username')}
                     required
                     onBlur={formik.handleBlur}
                     onChange={formik.handleChange}
                     value={formik.values.username}
                   />
-                  <FormLabel className="form-label" htmlFor="username">usrname</FormLabel>
+                  <FormLabel className="form-label" htmlFor="username" />
                 </FormGroup>
                 <FormGroup className="form-floating mb-3">
                   <FormControl
@@ -88,30 +90,31 @@ const SignupPage = () => {
                     name="password"
                     className=""
                     autoComplete="current-password"
-                    placeholder=">6"
+                    placeholder={t('signup.password')}
                     required
                     onBlur={formik.handleBlur}
                     onChange={formik.handleChange}
                     value={formik.values.password}
                   />
-                  <FormLabel className="form-label" htmlFor="password">pass</FormLabel>
+                  <FormLabel className="form-label" htmlFor="password" />
                 </FormGroup>
                 <FormGroup className="form-floating mb-4">
                   <FormControl
                     type="password"
+                    ß
                     id="passwordConfirm"
                     name="passwordConfirm"
                     className=""
                     autoComplete="password-confirm"
-                    placeholder="rep"
+                    placeholder={t('signup.confirm')}
                     required
                     onBlur={formik.handleBlur}
                     onChange={formik.handleChange}
                     value={formik.values.passwordConfirm}
                   />
-                  <FormLabel className="form-label" htmlFor="passwordConfirm">conf</FormLabel>
+                  <FormLabel className="form-label" htmlFor="passwordConfirm" />
                 </FormGroup>
-                <Button type="submit" className="w-100 mb-3" variant="outline-primary">reg</Button>
+                <Button type="submit" className="w-100 mb-3" variant="outline-primary">{t('signup.signup')}</Button>
               </Form>
             </Card.Body>
           </Card>

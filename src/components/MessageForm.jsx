@@ -4,12 +4,14 @@ import { useFormik } from 'formik';
 import {
   Button, Form, FormControl, FormGroup, InputGroup, Spinner,
 } from 'react-bootstrap';
+import { useTranslation } from 'react-i18next';
 
 import StoreContext from '../context/StoreContext.jsx';
 import SocketContext from '../context/SocketContext.jsx';
 import AuthorizationContext from '../context/AuthorizationContext.jsx';
 
 const MessageForm = () => {
+  const { t } = useTranslation();
   const { chat } = useContext(StoreContext);
   const { sendMessage } = useContext(SocketContext);
   const { user } = useContext(AuthorizationContext);
@@ -33,7 +35,6 @@ const MessageForm = () => {
 
       try {
         await sendMessage(message);
-        console.log('send new message');
         resetForm();
       } catch (err) {
         console.log(err);
@@ -69,9 +70,9 @@ const MessageForm = () => {
             {formik.isSubmitting ? (
               <>
                 <Spinner animation="border" size="sm" role="status" />
-                <span className="ms-2">sending...</span>
+                <span className="ms-2">{(t('sending'))}</span>
               </>
-            ) : <b>send</b>}
+            ) : <b>{(t('send'))}</b>}
           </Button>
         </InputGroup>
       </Form>

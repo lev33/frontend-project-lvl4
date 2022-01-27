@@ -5,6 +5,7 @@ import {
 import {
   Navbar, Button, Container, Nav,
 } from 'react-bootstrap';
+import { useTranslation } from 'react-i18next';
 
 import LoginPage from './LoginPage.jsx';
 import SignupPage from './SignupPage.jsx';
@@ -12,6 +13,7 @@ import ChatPage from './ChatPage.jsx';
 import AuthorizationContext from '../context/AuthorizationContext.jsx';
 
 export default function App() {
+  const { t } = useTranslation();
   const userData = JSON.parse(localStorage.getItem('loggedUser'));
   const [user, setUser] = useState(userData ? { username: userData.username } : null);
 
@@ -41,9 +43,9 @@ export default function App() {
       <BrowserRouter>
         <Navbar className="shadow-sm bg-white">
           <Container>
-            <Navbar.Brand className="navbar-brand" as={Link} to="/">hexletChat</Navbar.Brand>
+            <Navbar.Brand className="navbar-brand" as={Link} to="/">{(t('hexletChat'))}</Navbar.Brand>
             <Nav>
-              {user && (<Button variant="primary" onClick={logOut}>logOut</Button>)}
+              {user && (<Button variant="primary" onClick={logOut}>{(t('logOut'))}</Button>)}
             </Nav>
           </Container>
         </Navbar>
