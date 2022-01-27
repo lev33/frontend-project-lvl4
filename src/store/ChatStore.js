@@ -28,6 +28,14 @@ export default class ChatStore {
     this._messages.push(message);
   }
 
+  setChannelName(id, name) {
+    this._channels = this._channels.map((el) => (el.id === id ? { ...el, name } : el));
+  }
+
+  removeChannel(id) {
+    this._channels = this._channels.filter((el) => el.id !== id);
+  }
+
   get channels() {
     return this._channels;
   }

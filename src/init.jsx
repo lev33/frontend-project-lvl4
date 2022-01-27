@@ -18,6 +18,15 @@ export default (socket) => {
     chat.addChannel(data);
   });
 
+  socket.on('renameChannel', (data) => {
+    const { id, name } = data;
+    chat.setChannelName(id, name);
+  });
+
+  socket.on('removeChannel', (data) => {
+    chat.removeChannel(data.id);
+  });
+
   const sendMessage = (data) => new Promise((response, reject) => {
     const timer = setTimeout(() => reject(Error('netError')), 5000);
     socket.volatile.emit('newMessage', data, (res) => {
@@ -40,12 +49,36 @@ export default (socket) => {
     });
   });
 
+  const renameChannel = (data) => new Promise((response, reject) => {
+    const timer = setTimeout(() => reject(Error('netError')), 5000);
+    socket.volatile.emit('renameChannel', data, (res) => {
+      if (res.status === 'ok') {
+        clearTimeout(timer);
+        response(res);
+      }
+    });
+  });
+
+  const removeChannel = (data) => new Promise((response, reject) => {
+    const timer = setTimeout(() => reject(Error('netError')), 5000);
+    socket.volatile.emit('removeChannel', data, (res) => {
+      if (res.status === 'ok') {
+        clearTimeout(timer);
+        chat.setCurrentChannelId(1);
+        response(res);
+      }
+    });
+  });
+
   return (
     <StoreContext.Provider value={{
       chat,
     }}
     >
-      <SocketContext.Provider value={{ sendMessage, newChannel }}>
+      <SocketContext.Provider value={{
+        sendMessage, newChannel, renameChannel, removeChannel,
+      }}
+      >
         <App />
       </SocketContext.Provider>
     </StoreContext.Provider>

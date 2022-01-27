@@ -14,6 +14,9 @@ import SocketContext from '../context/SocketContext.jsx';
 const Channels = observer(() => {
   const { chat } = useContext(StoreContext);
   const { newChannel } = useContext(SocketContext);
+  const { removeChannel } = useContext(SocketContext);
+  const { renameChannel } = useContext(SocketContext);
+  // const { newChannel, renameChannel } = socket;
   const { channels, currentChannelId } = chat;
   const channelsNames = channels.map((el) => el.name);
 
@@ -44,7 +47,7 @@ const Channels = observer(() => {
   const formik = useFormik({
     initialValues: { channelName: '' },
     validateOnChange: false,
-    validationSchema: Yup.object({
+    validationSchema: action !== 'remove' && Yup.object({
       channelName: Yup.string().trim()
         .min(2, 'error')
         .max(20, 'error')
@@ -58,10 +61,12 @@ const Channels = observer(() => {
           await newChannel({ name });
         }
         if (action === 'remove') {
-          // await newChannel({ name });
+          console.log('remove', name, currentChannelId);
+          await removeChannel({ id: currentChannelId });
         }
         if (action === 'rename') {
-          // await newChannel({ name });
+          console.log('rename', name, currentChannelId);
+          await renameChannel({ id: currentChannelId, name });
         }
         handleClose();
       } catch (err) {
