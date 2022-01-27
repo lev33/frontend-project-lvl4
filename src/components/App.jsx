@@ -2,8 +2,12 @@ import React, { useState } from 'react';
 import {
   BrowserRouter, Routes, Route, Link,
 } from 'react-router-dom';
+import {
+  Navbar, Button, Container, Nav,
+} from 'react-bootstrap';
 
 import LoginPage from './LoginPage.jsx';
+import SignupPage from './SignupPage.jsx';
 import ChatPage from './ChatPage.jsx';
 import AuthorizationContext from '../context/AuthorizationContext.jsx';
 
@@ -35,14 +39,20 @@ export default function App() {
     }}
     >
       <BrowserRouter>
-        <div>
-          <h1>Welcome to React Router!</h1>
-          <Routes>
-            <Route path="/" element={user ? <ChatPage /> : <LoginPage />} />
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="*" element={<NoMatch />} />
-          </Routes>
-        </div>
+        <Navbar className="shadow-sm bg-white">
+          <Container>
+            <Navbar.Brand className="navbar-brand" as={Link} to="/">hexletChat</Navbar.Brand>
+            <Nav>
+              {user && (<Button variant="primary" onClick={logOut}>logOut</Button>)}
+            </Nav>
+          </Container>
+        </Navbar>
+        <Routes>
+          <Route path="/" element={user ? <ChatPage /> : <LoginPage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/signup" element={<SignupPage />} />
+          <Route path="*" element={<NoMatch />} />
+        </Routes>
       </BrowserRouter>
     </AuthorizationContext.Provider>
   );

@@ -53,6 +53,9 @@ const LoginPage = () => {
       <nav>
         <Link to="/">Home</Link>
       </nav>
+      <nav>
+        <Link to="/signup">signup</Link>
+      </nav>
     </>
   );
 };

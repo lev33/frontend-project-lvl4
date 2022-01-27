@@ -34,6 +34,7 @@ export default class ChatStore {
 
   removeChannel(id) {
     this._channels = this._channels.filter((el) => el.id !== id);
+    this._messages = this._messages.filter((el) => el.channelId !== id);
   }
 
   get channels() {
