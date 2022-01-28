@@ -1,9 +1,19 @@
 export default {
   translation: {
     hexletChat: 'Hexlet Chat',
+    page404: '404',
+    page404Text: 'Страница не найдена',
     logOut: 'Выйти',
     send: 'Отправить',
     sending: 'Отправка...',
+    addTitle: 'Добавить канал',
+    removeTitle: 'Удалить канал',
+    renameTitle: 'Переименовать канал',
+    cancelButton: 'Отменить',
+    submitButton: 'Отправить',
+    removeButton: 'Удалить',
+    confirmation: 'Уверены?',
+
     login: {
       logIn: 'Войти',
       nickname: 'Ваш ник',

@@ -11,6 +11,7 @@ import { ToastContainer } from 'react-toastify';
 import LoginPage from './LoginPage.jsx';
 import SignupPage from './SignupPage.jsx';
 import ChatPage from './ChatPage.jsx';
+import NoMatchPage from './NoMatchPage.jsx';
 import AuthorizationContext from '../context/AuthorizationContext.jsx';
 
 export default function App() {
@@ -55,25 +56,9 @@ export default function App() {
           <Route path="/" element={user ? <ChatPage /> : <LoginPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/signup" element={<SignupPage />} />
-          <Route path="*" element={<NoMatch />} />
+          <Route path="*" element={<NoMatchPage />} />
         </Routes>
       </BrowserRouter>
     </AuthorizationContext.Provider>
-  );
-}
-
-function NoMatch() {
-  return (
-    <>
-      <main>
-        <h2>Not found page</h2>
-        <p>
-          404
-        </p>
-      </main>
-      <nav>
-        <Link to="/">Home</Link>
-      </nav>
-    </>
   );
 }

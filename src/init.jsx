@@ -23,7 +23,7 @@ export default async (socket) => {
     });
 
   const rollbarConfig = {
-    accessToken: 'POST_CLIENT_ITEM_ACCESS_TOKEN',
+    accessToken: '98631610af5642cb95c4d688222c5492',
     captureUncaught: true,
     captureUnhandledRejections: true,
     payload: {

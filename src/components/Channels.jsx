@@ -24,25 +24,32 @@ const Channels = observer(() => {
 
   const [show, setShow] = useState(false);
   const [action, setAction] = useState('');
+  const [title, setTitle] = useState('');
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
   const textInput = useRef(null);
+  useEffect(() => {
+    if (textInput.current) textInput.current.focus();
+  });
 
   const handleChangeChannel = (id) => () => chat.setCurrentChannelId(id);
   const handleAddChannel = () => {
     setAction('add');
+    setTitle(t('addTitle'));
     handleShow();
   };
   const handleRemoveChannel = (id) => () => {
     chat.setCurrentChannelId(id);
     setAction('remove');
+    setTitle(t('removeTitle'));
     handleShow();
   };
   const handleRenameChannel = (id) => () => {
     chat.setCurrentChannelId(id);
     setAction('rename');
+    setTitle(t('renameTitle'));
     handleShow();
   };
 
@@ -119,8 +126,8 @@ const Channels = observer(() => {
                     </Button>
                     <Dropdown.Toggle split variant={variant} />
                     <Dropdown.Menu variant={variant}>
-                      <Dropdown.Item onClick={handleRemoveChannel(id)}>remove</Dropdown.Item>
-                      <Dropdown.Item onClick={handleRenameChannel(id)}>rename</Dropdown.Item>
+                      <Dropdown.Item onClick={handleRemoveChannel(id)}>{t('channels.remove')}</Dropdown.Item>
+                      <Dropdown.Item onClick={handleRenameChannel(id)}>{t('channels.rename')}</Dropdown.Item>
                     </Dropdown.Menu>
                   </Dropdown>
                 )
@@ -134,13 +141,13 @@ const Channels = observer(() => {
         <Modal.Header closeButton>
           <Modal.Title>
             {
-              action === 'add' ? 'add' : (action === 'remove' ? 'remove' : 'rename')
+              title
             }
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
           {action === 'remove' ? (
-            'Confirm?'
+            <span>{t('confirmation')}</span>
           ) : (
             <Form onSubmit={formik.handleSubmit}>
               <InputGroup noValidate className="mt-auto">
@@ -160,10 +167,10 @@ const Channels = observer(() => {
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
-            Close
+            {t('cancelButton')}
           </Button>
           <Button variant="primary" onClick={formik.handleSubmit}>
-            Save Changes
+            {action === 'remove' ? t('removeButton') : t('submitButton')}
           </Button>
         </Modal.Footer>
       </Modal>
