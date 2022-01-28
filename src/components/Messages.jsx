@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { observer } from 'mobx-react-lite';
 import { Col, FormGroup } from 'react-bootstrap';
+import filter from 'leo-profanity';
 
 import StoreContext from '../context/StoreContext.jsx';
 import MessageForm from './MessageForm.jsx';
@@ -31,7 +32,7 @@ const Messages = observer(() => {
             <div key={id} className="text-break mb-2">
               <b>{user}</b>
               {': '}
-              {text}
+              {filter.clean(text)}
             </div>
           ))}
         </FormGroup>
