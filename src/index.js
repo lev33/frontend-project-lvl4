@@ -11,7 +11,6 @@ import '../assets/application.scss';
 import init from './init.jsx';
 
 const start = async () => {
-
   if (process.env.NODE_ENV !== 'production') {
     localStorage.debug = 'chat:*';
   }

@@ -22,17 +22,17 @@ const SignupPage = () => {
 
   const validationSchema = Yup.object({
     username: Yup.string().trim()
-      .min(3, 'error')
-      .max(20, 'error')
+      .min(3, t('errors.length'))
+      .max(20, t('errors.length'))
       .required('errors.required'),
     password: Yup.string().trim()
-      .min(6, 'error')
-      .max(20, 'error')
-      .required('errors.required'),
+      .min(6, t('errors.passwordTooShort'))
+      .max(20, t('errors.passwordLength'))
+      .required(t('errors.required')),
     passwordConfirm: Yup.string().trim()
-      .oneOf([Yup.ref('password'), null], 'error')
+      .oneOf([Yup.ref('password'), null], t('errors.passwordNotMatch'))
       .min(6, 'error')
-      .required('error'),
+      .required(t('errors.required')),
   });
 
   const formik = useFormik({

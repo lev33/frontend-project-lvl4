@@ -7,16 +7,18 @@ import {
 } from 'react-bootstrap';
 import * as Yup from 'yup';
 import { useFormik } from 'formik';
+import { useTranslation } from 'react-i18next';
+import { toast } from 'react-toastify';
 
 import StoreContext from '../context/StoreContext.jsx';
 import SocketContext from '../context/SocketContext.jsx';
 
 const Channels = observer(() => {
+  const { t } = useTranslation();
   const { chat } = useContext(StoreContext);
   const { newChannel } = useContext(SocketContext);
   const { removeChannel } = useContext(SocketContext);
   const { renameChannel } = useContext(SocketContext);
-  // const { newChannel, renameChannel } = socket;
   const { channels, currentChannelId } = chat;
   const channelsNames = channels.map((el) => el.name);
 
@@ -49,24 +51,25 @@ const Channels = observer(() => {
     validateOnChange: false,
     validationSchema: action !== 'remove' && Yup.object({
       channelName: Yup.string().trim()
-        .min(2, 'error')
-        .max(20, 'error')
-        .notOneOf(channelsNames, 'error')
-        .required('required'),
+        .min(3, t('errors.length'))
+        .max(20, t('errors.length'))
+        .notOneOf(channelsNames, t('errors.channelExists'))
+        .required(t('errors.required')),
     }),
     onSubmit: async (initialValues) => {
       const name = initialValues.channelName.trim();
       try {
         if (action === 'add') {
           await newChannel({ name });
+          toast(t('channels.toastNew'));
         }
         if (action === 'remove') {
-          console.log('remove', name, currentChannelId);
           await removeChannel({ id: currentChannelId });
+          toast(t('channels.toastRemove'));
         }
         if (action === 'rename') {
-          console.log('rename', name, currentChannelId);
           await renameChannel({ id: currentChannelId, name });
+          toast(t('channels.toastRename'));
         }
         handleClose();
       } catch (err) {
