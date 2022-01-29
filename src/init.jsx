@@ -4,6 +4,8 @@ import React from 'react';
 import i18next from 'i18next';
 import { I18nextProvider, initReactI18next } from 'react-i18next';
 import { Provider, ErrorBoundary } from '@rollbar/react';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import App from './components/App.jsx';
 import chat from './store/chatStore.js';
@@ -102,6 +104,7 @@ export default async (socket) => {
           >
             <I18nextProvider i18n={i18n}>
               <App />
+              <ToastContainer />
             </I18nextProvider>
           </SocketContext.Provider>
         </StoreContext.Provider>

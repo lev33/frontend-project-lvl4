@@ -6,7 +6,6 @@ import {
   Navbar, Button, Container, Nav,
 } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
-import { ToastContainer } from 'react-toastify';
 
 import LoginPage from './LoginPage.jsx';
 import SignupPage from './SignupPage.jsx';
@@ -40,7 +39,6 @@ export default function App() {
       user, logIn, logOut, getAuthorizationHeader,
     }}
     >
-      <ToastContainer />
       <BrowserRouter>
         <Navbar className="shadow-sm bg-white">
           <Container>

@@ -68,15 +68,15 @@ const Channels = observer(() => {
       try {
         if (action === 'add') {
           await newChannel({ name });
-          toast(t('channels.toastNew'));
+          toast.success(t('channels.toastNew'));
         }
         if (action === 'remove') {
           await removeChannel({ id: currentChannelId });
-          toast(t('channels.toastRemove'));
+          toast.success(t('channels.toastRemove'));
         }
         if (action === 'rename') {
           await renameChannel({ id: currentChannelId, name });
-          toast(t('channels.toastRename'));
+          toast.success(t('channels.toastRename'));
         }
         handleClose();
       } catch (err) {
@@ -88,7 +88,7 @@ const Channels = observer(() => {
   return (
     <div className="col-4 col-md-2 border-end pt-5 px-0 bg-ligth">
       <FormGroup className="d-flex justify-content-between mb-2 ps-4 pe-2">
-        <span>channels</span>
+        <span>{t('channels.title')}</span>
         <Button
           type="button"
           variant="outline-primary"
@@ -155,7 +155,7 @@ const Channels = observer(() => {
                   ref={textInput}
                   name="channelName"
                   required
-                  placeholder={action === 'rename' ? 'enter new name' : 'addChannel'}
+                  placeholder={action === 'rename' ? 'enter new name' : ''}
                   maxLength={20}
                   value={formik.values.channelName}
                   onChange={formik.handleChange}

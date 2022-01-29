@@ -28,9 +28,9 @@ const ChatPage = () => {
         return;
       }
       if (error.isAxiosError && error.response.status === 500) {
-        toast(t('errors.networkError'));
+        toast.error(t('errors.networkError'));
       }
-      toast(t('errors.error'));
+      toast.error(t('errors.error'));
     }
   };
 
