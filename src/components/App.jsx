@@ -35,8 +35,6 @@ export default function App() {
       ? { Authorization: `Bearer ${loggedUser.token}` } : {};
   };
 
-  // logOut();
-
   return (
     <AuthorizationContext.Provider value={{
       user, logIn, logOut, getAuthorizationHeader,

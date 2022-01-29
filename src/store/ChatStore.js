@@ -1,51 +1,28 @@
 import { makeAutoObservable } from 'mobx';
 
-export default class ChatStore {
-  constructor() {
-    this._channels = [];
-    this._messages = [];
-    this._currentChannelId = 0;
-    makeAutoObservable(this);
-  }
+const chatStore = makeAutoObservable({
+  channels: [],
+  messages: [],
+  currentChannelId: 0,
 
-  setChannels(channels) {
-    this._channels = channels;
-  }
+  setChannels: (channels) => { chatStore.channels = channels; },
 
-  setMessages(messages) {
-    this._messages = messages;
-  }
+  setMessages: (messages) => { chatStore.messages = messages; },
 
-  setCurrentChannelId(currentChannelId) {
-    this._currentChannelId = currentChannelId;
-  }
+  setCurrentChannelId: (currentChannelId) => { chatStore.currentChannelId = currentChannelId; },
 
-  addChannel(channel) {
-    this._channels.push(channel);
-  }
+  addChannel: (channel) => { chatStore.channels.push(channel); },
 
-  addMessage(message) {
-    this._messages.push(message);
-  }
+  addMessage: (message) => { chatStore.messages.push(message); },
 
-  setChannelName(id, name) {
-    this._channels = this._channels.map((el) => (el.id === id ? { ...el, name } : el));
-  }
+  setChannelName: (id, name) => {
+    chatStore.channels = chatStore.channels.map((el) => (el.id === id ? { ...el, name } : el));
+  },
 
-  removeChannel(id) {
-    this._channels = this._channels.filter((el) => el.id !== id);
-    this._messages = this._messages.filter((el) => el.channelId !== id);
-  }
+  removeChannel: (id) => {
+    chatStore.channels = chatStore.channels.filter((el) => el.id !== id);
+    chatStore.messages = chatStore.messages.filter((el) => el.channelId !== id);
+  },
+});
 
-  get channels() {
-    return this._channels;
-  }
-
-  get messages() {
-    return this._messages;
-  }
-
-  get currentChannelId() {
-    return this._currentChannelId;
-  }
-}
+export default chatStore;

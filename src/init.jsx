@@ -6,14 +6,12 @@ import { I18nextProvider, initReactI18next } from 'react-i18next';
 import { Provider, ErrorBoundary } from '@rollbar/react';
 
 import App from './components/App.jsx';
-import ChatStore from './store/ChatStore.js';
+import chat from './store/chatStore.js';
 import StoreContext from './context/StoreContext.jsx';
 import SocketContext from './context/SocketContext.jsx';
 import resources from './resources/index.js';
 
 export default async (socket) => {
-  const chat = new ChatStore();
-
   const i18n = i18next.createInstance();
   await i18n
     .use(initReactI18next)
