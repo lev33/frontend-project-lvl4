@@ -8,7 +8,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 import App from './components/App.jsx';
-import chat from './store/chatStore.js';
+import chat from './store/chat.js';
 import StoreContext from './context/StoreContext.jsx';
 import SocketContext from './context/SocketContext.jsx';
 import resources from './resources/index.js';
