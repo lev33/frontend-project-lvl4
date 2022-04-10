@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import {
-  BrowserRouter, Routes, Route, Link,
+  BrowserRouter, Routes, Route, Link, Navigate,
 } from 'react-router-dom';
 import {
   Navbar, Button, Container, Nav,
@@ -49,7 +49,7 @@ export default function App() {
           </Container>
         </Navbar>
         <Routes>
-          <Route path="/" element={user ? <ChatPage /> : <LoginPage />} />
+          <Route path="/" element={user ? <ChatPage /> : <Navigate replace to="/login" />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/signup" element={<SignupPage />} />
           <Route path="*" element={<NoMatchPage />} />
