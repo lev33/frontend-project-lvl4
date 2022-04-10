@@ -20,6 +20,7 @@ export default {
       noAccount: 'Нет аккаунта?',
       password: 'Пароль',
       signup: 'Регистрация',
+      invalidUsernameOrPassword: 'Неверные имя пользователя или пароль',
     },
     signup: {
       confirm: 'Подтвердите пароль',

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import {
   NavLink, useNavigate,
 } from 'react-router-dom';
@@ -17,6 +17,7 @@ const LoginPage = () => {
   const { logIn } = useContext(AuthorizationContext);
   const navigate = useNavigate();
   const nameInput = useRef(null);
+  const [isAuthFailed, setIsAuthFailed] = useState(false);
 
   useEffect(() => {
     nameInput.current.focus();
@@ -42,6 +43,8 @@ const LoginPage = () => {
         logIn(data);
         navigate('/');
       } catch (err) {
+        setIsAuthFailed(true);
+        nameInput.current.focus();
         console.log(err.response);
       }
     },
@@ -88,6 +91,10 @@ const LoginPage = () => {
                     value={formik.values.password}
                   />
                   <FormLabel htmlFor="username">{t('login.password')}</FormLabel>
+                  {isAuthFailed
+                    && (
+                      t('login.invalidUsernameOrPassword')
+                  )}
                 </FormGroup>
                 <Button type="submit" className="w-100 mb-3" variant="outline-primary">{t('login.logIn')}</Button>
               </Form>
