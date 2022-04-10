@@ -1,4 +1,6 @@
-import React, { useContext, useEffect, useRef, useState, } from 'react';
+import React, {
+  useContext, useEffect, useRef, useState,
+} from 'react';
 import {
   NavLink, useNavigate,
 } from 'react-router-dom';
@@ -78,7 +80,7 @@ const LoginPage = () => {
                   />
                   <FormLabel htmlFor="username">{t('login.nickname')}</FormLabel>
                 </FormGroup>
-                <FormGroup className="form-floating mb-3">
+                <FormGroup className="form-floating mb-3 position-relative">
                   <FormControl
                     type="password"
                     id="password"
@@ -95,7 +97,7 @@ const LoginPage = () => {
                   <FormLabel htmlFor="username">{t('login.password')}</FormLabel>
                   {isAuthFailed
                     && (
-                      <Form.Control.Feedback type="invalid">
+                      <Form.Control.Feedback type="invalid" tooltip>
                         {t('login.invalidUsernameOrPassword')}
                       </Form.Control.Feedback>
                     )}
