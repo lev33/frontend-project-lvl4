@@ -72,7 +72,7 @@ const LoginPage = () => {
                     onChange={formik.handleChange}
                     value={formik.values.username}
                   />
-                  <FormLabel htmlFor="username" />
+                  <FormLabel htmlFor="username">{t('login.nickname')}</FormLabel>
                 </FormGroup>
                 <FormGroup className="form-floating mb-3">
                   <FormControl
@@ -87,7 +87,7 @@ const LoginPage = () => {
                     onChange={formik.handleChange}
                     value={formik.values.password}
                   />
-                  <FormLabel htmlFor="password" />
+                  <FormLabel htmlFor="username">{t('login.password')}</FormLabel>
                 </FormGroup>
                 <Button type="submit" className="w-100 mb-3" variant="outline-primary">{t('login.logIn')}</Button>
               </Form>
