@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState, } from 'react';
 import {
   NavLink, useNavigate,
 } from 'react-router-dom';
@@ -67,13 +67,14 @@ const LoginPage = () => {
                     type="text"
                     id="username"
                     name="username"
-                    className=""
                     autoComplete="username"
                     placeholder={t('login.nickname')}
                     required
                     onBlur={formik.handleBlur}
                     onChange={formik.handleChange}
                     value={formik.values.username}
+                    isInvalid={isAuthFailed
+                      || (formik.touched.username && !!formik.errors.username)}
                   />
                   <FormLabel htmlFor="username">{t('login.nickname')}</FormLabel>
                 </FormGroup>
@@ -82,21 +83,22 @@ const LoginPage = () => {
                     type="password"
                     id="password"
                     name="password"
-                    className=""
                     autoComplete="current-password"
                     placeholder={t('login.password')}
                     required
                     onBlur={formik.handleBlur}
                     onChange={formik.handleChange}
                     value={formik.values.password}
+                    isInvalid={isAuthFailed
+                      || (formik.touched.password && !!formik.errors.password)}
                   />
                   <FormLabel htmlFor="username">{t('login.password')}</FormLabel>
                   {isAuthFailed
                     && (
-                      <Form.Text type="invalid">
+                      <Form.Control.Feedback type="invalid">
                         {t('login.invalidUsernameOrPassword')}
-                      </Form.Text>
-                  )}
+                      </Form.Control.Feedback>
+                    )}
                 </FormGroup>
                 <Button type="submit" className="w-100 mb-3" variant="outline-primary">{t('login.logIn')}</Button>
               </Form>
