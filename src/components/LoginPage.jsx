@@ -93,7 +93,9 @@ const LoginPage = () => {
                   <FormLabel htmlFor="username">{t('login.password')}</FormLabel>
                   {isAuthFailed
                     && (
-                      t('login.invalidUsernameOrPassword')
+                      <Form.Text type="invalid">
+                        {t('login.invalidUsernameOrPassword')}
+                      </Form.Text>
                   )}
                 </FormGroup>
                 <Button type="submit" className="w-100 mb-3" variant="outline-primary">{t('login.logIn')}</Button>
