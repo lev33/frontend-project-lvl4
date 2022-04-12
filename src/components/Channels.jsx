@@ -118,14 +118,13 @@ const Channels = observer(() => {
                 : (
                   <Dropdown as={ButtonGroup}>
                     <Button
-                      role={t('channels.role')}
                       variant={variant}
                       onClick={handleChangeChannel(id)}
                     >
                       <span># </span>
                       {name}
                     </Button>
-                    <Dropdown.Toggle split variant={variant} />
+                    <Dropdown.Toggle split variant={variant} role={t('channels.role')} />
                     <Dropdown.Menu variant={variant}>
                       <Dropdown.Item onClick={handleRemoveChannel(id)}>{t('channels.remove')}</Dropdown.Item>
                       <Dropdown.Item onClick={handleRenameChannel(id)}>{t('channels.rename')}</Dropdown.Item>
