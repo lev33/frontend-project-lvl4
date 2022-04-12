@@ -80,8 +80,14 @@ const SignupPage = () => {
                     onBlur={formik.handleBlur}
                     onChange={formik.handleChange}
                     value={formik.values.username}
+                    isInvalid={formik.errors.username && formik.touched.username}
                   />
                   <FormLabel className="form-label" htmlFor="username">{t('signup.username')}</FormLabel>
+                  {formik.touched.username && formik.errors.username && (
+                    <Form.Control.Feedback type="invalid">
+                      {t('errors.length')}
+                    </Form.Control.Feedback>
+                  )}
                 </FormGroup>
                 <FormGroup className="form-floating mb-3">
                   <FormControl
@@ -95,8 +101,14 @@ const SignupPage = () => {
                     onBlur={formik.handleBlur}
                     onChange={formik.handleChange}
                     value={formik.values.password}
+                    isInvalid={formik.errors.password && formik.touched.password}
                   />
                   <FormLabel className="form-label" htmlFor="password">{t('signup.password')}</FormLabel>
+                  {formik.touched.password && formik.errors.password && (
+                    <Form.Control.Feedback type="invalid">
+                      {t('errors.passwordLength')}
+                    </Form.Control.Feedback>
+                  )}
                 </FormGroup>
                 <FormGroup className="form-floating mb-4">
                   <FormControl
@@ -111,8 +123,14 @@ const SignupPage = () => {
                     onBlur={formik.handleBlur}
                     onChange={formik.handleChange}
                     value={formik.values.passwordConfirm}
+                    isInvalid={formik.errors.passwordConfirm && formik.touched.passwordConfirm}
                   />
                   <FormLabel className="form-label" htmlFor="passwordConfirm">{t('signup.confirm')}</FormLabel>
+                  {formik.touched.passwordConfirm && formik.errors.passwordConfirm && (
+                    <Form.Control.Feedback type="invalid">
+                      {t('errors.passwordNotMatch')}
+                    </Form.Control.Feedback>
+                  )}
                 </FormGroup>
                 <Button type="submit" className="w-100 mb-3" variant="outline-primary">{t('signup.signup')}</Button>
               </Form>
