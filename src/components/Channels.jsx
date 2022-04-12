@@ -160,6 +160,7 @@ const Channels = observer(() => {
                   value={formik.values.channelName}
                   onChange={formik.handleChange}
                   disabled={formik.isSubmitting}
+                  aria-label={t('channels.name')}
                 />
               </InputGroup>
             </Form>
