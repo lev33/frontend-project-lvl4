@@ -106,7 +106,7 @@ const SignupPage = () => {
                   <FormLabel className="form-label" htmlFor="password">{t('signup.password')}</FormLabel>
                   {formik.touched.password && formik.errors.password && (
                     <Form.Control.Feedback type="invalid">
-                      {t('errors.passwordLength')}
+                      {t('errors.passwordTooShort')}
                     </Form.Control.Feedback>
                   )}
                 </FormGroup>
