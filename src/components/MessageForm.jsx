@@ -60,6 +60,7 @@ const MessageForm = () => {
             value={formik.values.message}
             onChange={formik.handleChange}
             disabled={formik.isSubmitting}
+            aria-label={t('newMessage')}
           />
           <Button
             type="submit"

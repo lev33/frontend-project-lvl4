@@ -84,7 +84,7 @@ const LoginPage = () => {
                     isInvalid={isAuthFailed
                       || (formik.touched.password && !!formik.errors.password)}
                   />
-                  <FormLabel htmlFor="username">{t('login.password')}</FormLabel>
+                  <FormLabel htmlFor="password">{t('login.password')}</FormLabel>
                   {isAuthFailed
                     && (
                       <Form.Control.Feedback type="invalid" tooltip>
