@@ -155,7 +155,7 @@ const Channels = observer(() => {
                   ref={textInput}
                   name="channelName"
                   required
-                  placeholder={action === 'rename' ? 'enter new name' : ''}
+                  placeholder={action === 'rename' ? 'enter new name' : t('channels.name')}
                   maxLength={20}
                   value={formik.values.channelName}
                   onChange={formik.handleChange}

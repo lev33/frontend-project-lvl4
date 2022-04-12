@@ -42,6 +42,7 @@ export default {
       error: 'Ошибка!',
     },
     channels: {
+      name: 'Имя канала',
       title: 'Каналы',
       remove: 'Удалить',
       rename: 'Переименовать',
