@@ -43,6 +43,7 @@ export default {
     },
     channels: {
       name: 'Имя канала',
+      role: 'Управление каналом',
       title: 'Каналы',
       remove: 'Удалить',
       rename: 'Переименовать',

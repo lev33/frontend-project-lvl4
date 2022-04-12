@@ -118,6 +118,7 @@ const Channels = observer(() => {
                 : (
                   <Dropdown as={ButtonGroup}>
                     <Button
+                      role={t('channels.role')}
                       variant={variant}
                       onClick={handleChangeChannel(id)}
                     >
