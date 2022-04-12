@@ -55,7 +55,7 @@ const MessageForm = () => {
             name="message"
             required
             data-testid="new-message"
-            placeholder="New message..."
+            placeholder={t('newMessage')}
             maxLength={400}
             value={formik.values.message}
             onChange={formik.handleChange}

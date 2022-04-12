@@ -13,6 +13,7 @@ export default {
     submitButton: 'Отправить',
     removeButton: 'Удалить',
     confirmation: 'Уверены?',
+    newMessage: 'Новое сообщение',
 
     login: {
       logIn: 'Войти',
