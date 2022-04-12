@@ -81,7 +81,7 @@ const SignupPage = () => {
                     onChange={formik.handleChange}
                     value={formik.values.username}
                   />
-                  <FormLabel className="form-label" htmlFor="username" />
+                  <FormLabel className="form-label" htmlFor="username">{t('signup.username')}</FormLabel>
                 </FormGroup>
                 <FormGroup className="form-floating mb-3">
                   <FormControl
@@ -96,7 +96,7 @@ const SignupPage = () => {
                     onChange={formik.handleChange}
                     value={formik.values.password}
                   />
-                  <FormLabel className="form-label" htmlFor="password" />
+                  <FormLabel className="form-label" htmlFor="password">{t('signup.password')}</FormLabel>
                 </FormGroup>
                 <FormGroup className="form-floating mb-4">
                   <FormControl
@@ -112,7 +112,7 @@ const SignupPage = () => {
                     onChange={formik.handleChange}
                     value={formik.values.passwordConfirm}
                   />
-                  <FormLabel className="form-label" htmlFor="passwordConfirm" />
+                  <FormLabel className="form-label" htmlFor="passwordConfirm">{t('signup.confirm')}</FormLabel>
                 </FormGroup>
                 <Button type="submit" className="w-100 mb-3" variant="outline-primary">{t('signup.signup')}</Button>
               </Form>
