@@ -110,6 +110,7 @@ const Channels = observer(() => {
                   <Button
                     variant={variant}
                     onClick={handleChangeChannel(id)}
+                    role="button"
                   >
                     <span className="me-1"># </span>
                     {name}
@@ -125,7 +126,7 @@ const Channels = observer(() => {
                       <span className="me-1"># </span>
                       {name}
                     </Button>
-                    <Dropdown.Toggle role="button" split variant={variant} className="flex-grow-0">
+                    <Dropdown.Toggle split variant={variant} className="flex-grow-0">
                       <span className="d-none">{t('channels.role')}</span>
                     </Dropdown.Toggle>
                     <Dropdown.Menu variant={variant}>
