@@ -122,11 +122,11 @@ const Channels = observer(() => {
                       onClick={handleChangeChannel(id)}
                       className="w-100 rounded-0 text-start text-truncate"
                     >
-                      <span  className="me-1"># </span>
+                      <span className="me-1"># </span>
                       {name}
                     </Button>
                     <Dropdown.Toggle split variant={variant} className='flex-grow-0'>
-                      <span style={{visibility: 'hidden'}}>{t('channels.role')}</span>
+                      <span className="d-none">{t('channels.role')}</span>
                     </Dropdown.Toggle>
                     <Dropdown.Menu variant={variant}>
                       <Dropdown.Item onClick={handleRemoveChannel(id)}>{t('channels.remove')}</Dropdown.Item>
