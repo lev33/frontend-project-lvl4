@@ -110,7 +110,6 @@ const Channels = observer(() => {
                   <Button
                     variant={variant}
                     onClick={handleChangeChannel(id)}
-                    role="button"
                   >
                     <span className="me-1"># </span>
                     {name}
